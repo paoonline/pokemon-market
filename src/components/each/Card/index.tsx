@@ -2,8 +2,8 @@ import { ButttonAddToCard } from "../Button"
 
 export const Card = (): JSX.Element => {
     return (
-        <div className='bg-backgroundBlack w-44 h-176 flex flex-col rounded-2xl justify-around items-center mb-36'>
-            <div className='absolute h-142 w-102 mb-60'>
+        <div className='mt-12 sm:mt-0 bg-backgroundBlack w-full sm:w-44 h-176 flex flex-col rounded-2xl justify-around items-center mb-36 pl-3 pr-3'>
+            <div className='absolute w-194 h-270 sm:h-142 sm:w-102 mb-82 sm:mb-60'>
                 <img
                     style={{ backgroundRepeat: 'repeat-y' }}
                     src={'https://images.pokemontcg.io/pl3/1.png'}
@@ -12,13 +12,16 @@ export const Card = (): JSX.Element => {
                 />
             </div>
 
-            <div className='text-white text-xs text-center mt-10'>name</div>
+            <div className='text-white text-xs text-center mt-10 break-all relative top-3'>namenamenamenamenamenamenamename</div>
 
-            <div>
-                <div className='text-gray-card text-xs text-center mb-2'>$ 2.29 - 20 Cards</div>
+            <div className='text-gray-card text-xs text-center flex flex-row justify-around relative top-2'>
+                $ 2.29
+                <div className="ml-2 mr-2">{'\u2022'} </div>
+                20 Cards
+            </div>
+            <div className="w-full pb-1">
                 <ButttonAddToCard />
             </div>
-
         </div>
     )
 

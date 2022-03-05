@@ -20,7 +20,7 @@ export const ButttonAddToCard = (): JSX.Element => {
     return (
         <button
             type="submit"
-            className="text-xs h-38 w-144 bg-gray-not-active border border-transparent rounded-md pr-2 flex items-center justify-center font-medium text-white hover:bg-gray-active"
+            className="text-xs h-38 w-full bg-gray-not-active border border-transparent rounded-md pr-2 flex items-center justify-center font-medium text-white hover:bg-gray-active"
         >
             <ShoppingBagIcon className='h-5 w-5 pr-1 mr-1' />
             Add to bag

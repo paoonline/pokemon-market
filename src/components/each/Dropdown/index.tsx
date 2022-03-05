@@ -16,12 +16,12 @@ interface DropdownAble {
 export const Dropdown = (props: DropdownAble) => {
     return (
         <Menu as="div" className="relative inline-block text-left">
-            <div>
-                <Menu.Button className="border-solid border-2 border-border-hover bg-backgroundBlack text-gray-400 inline-flex justify-center w-full rounded-md   shadow-sm px-4 py-2  text-sm font-medium text-700 hover:text-white focus:outline-none">
-                    Set
-                    <ChevronDownIcon className="-mr-1 ml-2 h-5 w-5" aria-hidden="true" />
-                </Menu.Button>
-            </div>
+
+            <Menu.Button className="flex-row flex items-center h-36 w-20 border-solid border-2 border-border-hover bg-backgroundBlack text-gray-400 inline-flex justify-center w-full rounded-md   shadow-sm  text-sm font-medium text-700 hover:text-white focus:outline-none">
+                Set
+                <ChevronDownIcon className="-mr-1 ml-2 h-5 w-5" aria-hidden="true" />
+            </Menu.Button>
+
 
             <Transition
                 as={Fragment}
@@ -32,7 +32,7 @@ export const Dropdown = (props: DropdownAble) => {
                 leaveFrom="transform opacity-100 scale-100"
                 leaveTo="transform opacity-0 scale-95"
             >
-                <Menu.Items className="border-solid border-2 border-border-hover  origin-top-right absolute right-0 mt-2 w-44 rounded-md shadow-lg bg-backgroundBlack ring-1 ring-black ring-opacity-5 focus:outline-none">
+                <Menu.Items className="z-50 border-solid border-2 border-border-hover  origin-top-right absolute right-0 mt-2 w-44 rounded-md shadow-lg bg-backgroundBlack ring-1 ring-black ring-opacity-5 focus:outline-none">
                     <div className="">
                         <Menu.Item>
                             {({ active }) => (
