@@ -1,7 +1,6 @@
-import React from 'react';
 import './App.css';
 import { PokemonTCG } from 'pokemon-tcg-sdk-typescript'
-import { Layout } from './components'
+import { Filter, Layout, Navbar, ListCard } from './components'
 
 function App() {
 
@@ -12,7 +11,9 @@ function App() {
 
   return (
     <Layout>
-
+      <Navbar />
+      <Filter />
+      <ListCard />
     </Layout>
   );
 }

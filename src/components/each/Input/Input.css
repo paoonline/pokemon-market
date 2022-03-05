@@ -1,0 +1,11 @@
+.input-with-icon-border {
+  background-color: transparent;
+  width: 100%;
+  border: 1px solid #393c49;
+}
+
+.input-with-icon-border:hover {
+  background-color: transparent;
+  width: 100%;
+  border: 1px solid white;
+}

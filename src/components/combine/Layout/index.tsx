@@ -1,10 +1,13 @@
 import './Layout.css';
-import { Navbar } from '../Navbar'
 
-export const Layout = (props: any): JSX.Element => {
+interface LayoutAble {
+    children: Object
+}
+
+export const Layout = (props: LayoutAble): JSX.Element => {
     return (
-        <div className='paddingResponsive'>
-            <Navbar />
+        <div className='paddingResponsive p-5'>
+            {props.children}
         </div>
     )
 }
