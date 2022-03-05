@@ -11,6 +11,7 @@ module.exports = {
         "gray-disabled": "rgba(255, 255, 255, 0.08)",
         "button-orange": "#EA7C69",
         "gray-card": "#ABBBC2",
+        "overlay-slide": "rgba(0, 0, 0, 0.7)",
       },
       fontSize: {
         xlnew: 26,
@@ -21,6 +22,7 @@ module.exports = {
         54: "54px",
         366: "366px",
         194: "194.73px",
+        396: "396px",
       },
       height: {
         142: "142px",
@@ -29,6 +31,9 @@ module.exports = {
         54: "54px",
         270: "270.81px",
         36: "36px",
+        "60px": "60px",
+        "70%": "70%",
+        "60%": "60%",
       },
       margin: {
         82: "22rem",

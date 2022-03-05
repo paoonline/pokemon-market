@@ -12,7 +12,14 @@
 
 @media only screen and (min-width: 768px) {
   .paddingResponsive {
-    padding-left: 7em;
-    padding-right: 7em;
+    padding-left: 5em;
+    padding-right: 5em;
+  }
+}
+
+@media only screen and (min-width: 1024px) {
+  .paddingResponsive {
+    padding-left: 8em;
+    padding-right: 8em;
   }
 }

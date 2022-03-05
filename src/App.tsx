@@ -1,6 +1,7 @@
 import './App.css';
 import { PokemonTCG } from 'pokemon-tcg-sdk-typescript'
-import { Filter, Layout, Navbar, ListCard } from './components'
+import { Filter, Layout, Navbar, ListCard, Slide } from './components'
+import { SlideProvider } from './store/SlideContext';
 
 function App() {
 
@@ -11,9 +12,12 @@ function App() {
 
   return (
     <Layout>
-      <Navbar />
-      <Filter />
-      <ListCard />
+      <SlideProvider>
+        <Navbar />
+        <Filter />
+        <ListCard />
+        <Slide />
+      </SlideProvider>
     </Layout>
   );
 }

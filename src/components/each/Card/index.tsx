@@ -1,4 +1,4 @@
-import { ButttonAddToCard } from "../Button"
+import { ButtonAddToCard } from "../Button"
 
 export const Card = (): JSX.Element => {
     return (
@@ -14,13 +14,13 @@ export const Card = (): JSX.Element => {
 
             <div className='text-white text-xs text-center mt-10 break-all relative top-3'>namenamenamenamenamenamenamename</div>
 
-            <div className='text-gray-card text-xs text-center flex flex-row justify-around relative top-2'>
+            <div className='text-gray-card text-xs text-center flex flex-row justify-around relative top-2 break-all'>
                 $ 2.29
-                <div className="ml-2 mr-2">{'\u2022'} </div>
+                <div className="ml-2 mr-2 break-all">{'\u2022'} </div>
                 20 Cards
             </div>
             <div className="w-full pb-1">
-                <ButttonAddToCard />
+                <ButtonAddToCard />
             </div>
         </div>
     )

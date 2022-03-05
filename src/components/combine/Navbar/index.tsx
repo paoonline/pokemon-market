@@ -9,7 +9,7 @@ export const Navbar = (): JSX.Element => {
         <>
             <div className="grid grid-rows-1 grid-flow-col gap-4">
                 <div className='col-start-1 col-end-10 col-span-1'>
-                    <div className='text-white text-xlnew'>{t.logo}</div>
+                    <div className='text-white text-xlnew font-semibold'>{t.logo}</div>
                 </div>
 
                 <div className='col-end-12 col-span-1 flex flex-row justify-end '>
