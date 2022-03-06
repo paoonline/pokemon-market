@@ -15,7 +15,7 @@ export const ActionProvider = (props: childrenProps) => {
     const [tempList, setTempList] = useState<Array<any>>([]);
     const [stampSearch, setStampSearch] = useState(false)
     const initContext = useContext(InitContext)
-    const { setCardList, CardList, dropdownText, setPaginationPage, refreshList } = initContext
+    const { setCardList, CardList, dropdownText, setPaginationPage, refreshList, paginationPage } = initContext
 
     const handleTempList = async () => {
         setTempList(CardList)
@@ -28,7 +28,7 @@ export const ActionProvider = (props: childrenProps) => {
         if (type === 'Type') {
             await dropdownText.setTypeDropdown(targetValue)
             if (targetValue === 'Type') {
-                setCardList(tempList)
+                refreshList(paginationPage)
             }
             filterTempList = await tempList.filter(res => res.types[0] === targetValue)
             if (filterTempList.length > 0) {
@@ -38,7 +38,7 @@ export const ActionProvider = (props: childrenProps) => {
         } else {
             await dropdownText.setRarityDropdown(targetValue)
             if (targetValue === 'Rarity') {
-                setCardList(tempList)
+                refreshList(paginationPage)
             }
             filterTempList = await tempList.filter(res => res.rarity === targetValue)
             if (filterTempList.length > 0) {
@@ -53,11 +53,15 @@ export const ActionProvider = (props: childrenProps) => {
     }
 
     useEffect(() => {
-        if (!stampSearch && CardList.length > 0) {
+        if (!stampSearch && (CardList.length > 0)) {
+            handleTempList()
+        }
+        if (paginationPage > 1 && stampSearch) {
+            setStampSearch(false)
             handleTempList()
         }
 
-    }, [CardList])
+    }, [CardList, paginationPage])
 
     const handleTextSearch = async (textSearch: string) => {
         if (textSearch.length > 4) {
@@ -68,6 +72,7 @@ export const ActionProvider = (props: childrenProps) => {
         }
         if (textSearch.length === 0) {
             setCardList(tempList)
+            refreshList(paginationPage)
         }
     }
     const store = {

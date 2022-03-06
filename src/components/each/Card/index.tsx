@@ -38,7 +38,7 @@ export const Card = (props: CardAble): JSX.Element => {
                 {props.list.set.total} Cards
             </div>
             <div className="w-full pb-1">
-                <ButtonAddToCard />
+                <ButtonAddToCard amount={props.list.set.total} />
             </div>
         </div>
     )

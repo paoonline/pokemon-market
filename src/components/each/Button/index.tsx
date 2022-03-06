@@ -6,6 +6,9 @@ import { useContext } from 'react'
 import { SlideContext } from '../../../store'
 import language from '../../../utils/language'
 
+interface ButtonAble {
+    amount: number
+}
 
 export const ButtonCart = (props: any): JSX.Element => {
     const { setOpen } = useContext(SlideContext)
@@ -27,11 +30,14 @@ export const ButtonClosed = (props: any): JSX.Element => {
     )
 }
 
-export const ButtonAddToCard = (): JSX.Element => {
+export const ButtonAddToCard = (props: ButtonAble): JSX.Element => {
+
     return (
         <button
+            disabled={props.amount <= 0}
+            onClick={() => { }}
             type="submit"
-            className="text-xs h-38 w-full bg-gray-not-active border border-transparent rounded-md pr-2 flex items-center justify-center font-medium text-white hover:bg-gray-active"
+            className={`text-xs h-38 w-full ${props.amount > 0 ? 'bg-gray-not-active' : 'bg-add-disabled'} border border-transparent rounded-md pr-2 flex items-center justify-center font-medium text-white ${props.amount > 0 && 'hover:bg-gray-active'}`}
         >
             <ShoppingBagIcon className='h-5 w-5 pr-1 mr-1' />
             {language.add_bag}

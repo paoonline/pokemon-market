@@ -13,6 +13,7 @@ module.exports = {
         "gray-card": "#ABBBC2",
         "overlay-slide": "rgba(0, 0, 0, 0.7)",
         "background-main": "#282c34",
+        "add-disabled": "rgba(255, 255, 255, 0.04)",
       },
       fontSize: {
         xlnew: 26,
