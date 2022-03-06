@@ -3,8 +3,8 @@ import { InitContext } from '../InitContext'
 interface ActionProps {
     handleTextSearch: (textSearch: string) => void,
     tempList: Array<any>;
+    handleSubmitDropdown: (obj: any, type: string) => void,
 }
-
 interface childrenProps {
     children: object
 }
@@ -14,18 +14,46 @@ export const ActionProvider = (props: childrenProps) => {
     const [tempList, setTempList] = useState<Array<any>>([]);
     const [stampSearch, setStampSearch] = useState(false)
     const initContext = useContext(InitContext)
-    const { setCardList, CardList } = initContext
+    const { setCardList, CardList, dropdownText } = initContext
 
     const handleTempList = async () => {
-        await setTempList(CardList)
+        setTempList(CardList)
+        setStampSearch(true)
+    }
+
+    const handleSubmitDropdown = async (e: any, type: string) => {
+        let filterTempList
+        const targetValue = e.target.value
+        if (type === 'Type') {
+            await dropdownText.setTypeDropdown(targetValue)
+            if (targetValue === 'Type') {
+                setCardList(tempList)
+            }
+            filterTempList = await tempList.filter(res => res.types[0] === targetValue)
+            if (filterTempList.length > 0) {
+                setCardList(filterTempList)
+            }
+
+        } else {
+            await dropdownText.setRarityDropdown(targetValue)
+            if (targetValue === 'Rarity') {
+                setCardList(tempList)
+            }
+            filterTempList = await tempList.filter(res => res.rarity === targetValue)
+            if (filterTempList.length > 0) {
+                setCardList(filterTempList)
+            }
+        }
     }
 
     useEffect(() => {
-        handleTempList()
-    }, [stampSearch])
+        if (!stampSearch && CardList.length > 0) {
+            handleTempList()
+        }
+
+    }, [CardList])
 
     const handleTextSearch = async (textSearch: string) => {
-        setStampSearch(true)
         if (textSearch.length > 4) {
             let filterTempList = await tempList.filter(res => res.name.toLowerCase().includes(textSearch.toLowerCase()))
             if (filterTempList.length > 0) {
@@ -38,7 +66,8 @@ export const ActionProvider = (props: childrenProps) => {
     }
     const store = {
         handleTextSearch,
-        tempList
+        tempList,
+        handleSubmitDropdown
     };
     return (
         <ActionContext.Provider value={store}>

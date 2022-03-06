@@ -7,7 +7,13 @@ interface InitProps extends CardProps {
     Rarity: Array<string>;
     Type: Array<string>
     setPage: (pageNumber: string) => void,
-    setCardList: (CardList: Array<any>) => void
+    setCardList: (CardList: Array<any>) => void,
+    dropdownText: {
+        RarityDropdown: string,
+        TypeDropdown: string,
+        setRarityDropdown: (rarity: string) => void,
+        setTypeDropdown: (type: string) => void,
+    }
 }
 interface childrenProps {
     children: object
@@ -32,6 +38,9 @@ export const InitProvider = (props: childrenProps) => {
         pageSize: 0,
         totalCount: 0,
     })
+    const [RarityDropdown, setRarityDropdown] = useState('Rarity')
+    const [TypeDropdown, setTypeDropdown] = useState('Type')
+
     const getInit = async () => {
         const getPokemonCard = new Promise(
             async (resolve, reject) => {
@@ -70,7 +79,8 @@ export const InitProvider = (props: childrenProps) => {
                         .catch((error: AxiosError) => {
                             console.error('error: ', error);
                         })
-                    setType([...data.data])
+                    setRarityType(['Rarity', ...data.data])
+
                     resolve(true)
                 } catch (error) {
                     reject(error)
@@ -89,7 +99,7 @@ export const InitProvider = (props: childrenProps) => {
                         .catch((error: AxiosError) => {
                             console.error('error: ', error);
                         })
-                    setRarityType([...data.data])
+                    setType(['Type', ...data.data])
                     resolve(true)
                 } catch (error) {
                     reject(error)
@@ -122,7 +132,13 @@ export const InitProvider = (props: childrenProps) => {
         pageSize: pageOverview.pageSize,
         totalCount: pageOverview.totalCount,
         Rarity: RarityType,
-        Type: Type
+        Type: Type,
+        dropdownText: {
+            RarityDropdown: RarityDropdown,
+            TypeDropdown: TypeDropdown,
+            setRarityDropdown: (rarity: string) => setRarityDropdown(rarity),
+            setTypeDropdown: (type: string) => setTypeDropdown(type),
+        }
     };
     return (
         <InitContext.Provider value={store}>
