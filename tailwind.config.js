@@ -12,6 +12,7 @@ module.exports = {
         "button-orange": "#EA7C69",
         "gray-card": "#ABBBC2",
         "overlay-slide": "rgba(0, 0, 0, 0.7)",
+        "background-main": "#282c34",
       },
       fontSize: {
         xlnew: 26,

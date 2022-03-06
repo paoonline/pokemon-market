@@ -16,6 +16,7 @@ import { ButtonNumber } from "./each/Button";
 import { Card } from "./each/Card";
 import { ButtonClosed } from "./each/Button";
 import { ButtonContinueToPayment } from "./each/Button";
+import { Loading } from "./each/Loading";
 
 export {
   Layout,
@@ -35,4 +36,5 @@ export {
   CartList,
   ButtonNumber,
   ButtonContinueToPayment,
+  Loading,
 };

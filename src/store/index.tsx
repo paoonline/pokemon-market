@@ -1,7 +1,11 @@
-import { SlideContext } from "./SlideContext";
-import { SlideProvider } from "./SlideContext";
+import { SlideContext, SlideProvider } from "./SlideContext";
+import { InitContext, InitProvider } from "./InitContext";
+import { CombineProvider } from "./CombineProvider";
 
 export {
     SlideContext,
-    SlideProvider
+    SlideProvider,
+    InitContext,
+    InitProvider,
+    CombineProvider
 }

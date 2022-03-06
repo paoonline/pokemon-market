@@ -3,10 +3,14 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import { CombineProvider } from './store';
+
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <CombineProvider>
+      <App />
+    </CombineProvider>
   </React.StrictMode>,
   document.getElementById('root')
 );
