@@ -1,12 +1,8 @@
 import { AxiosError } from "axios";
 import { useEffect, useState, createContext } from "react";
 import { instanceAxios } from '../../utils/'
-interface InitProps {
+interface InitProps extends CardProps {
     loading: boolean;
-    count: number,
-    page: number,
-    pageSize: number,
-    totalCount: number,
     CardList: Array<any>;
     Rarity: Array<string>;
     Type: Array<string>
@@ -14,6 +10,12 @@ interface InitProps {
 }
 interface childrenProps {
     children: object
+}
+interface CardProps {
+    count: number,
+    page: number,
+    pageSize: number,
+    totalCount: number,
 }
 
 export const InitContext = createContext({} as InitProps);
@@ -23,6 +25,12 @@ export const InitProvider = (props: childrenProps) => {
     const [CardList, setCardList] = useState<Array<any>>([]);
     const [RarityType, setRarityType] = useState<Array<string>>([]);
     const [Type, setType] = useState<Array<string>>([]);
+    const [pageOverview, setPageOverview] = useState<CardProps>({
+        count: 0,
+        page: 0,
+        pageSize: 0,
+        totalCount: 0,
+    })
     const getInit = async () => {
         const getPokemonCard = new Promise(
             async (resolve, reject) => {
@@ -35,6 +43,13 @@ export const InitProvider = (props: childrenProps) => {
                         .catch((error: AxiosError) => {
                             console.error('error: ', error);
                         })
+
+                    setPageOverview({
+                        count: data.count,
+                        page: data.page,
+                        pageSize: data.pageSize,
+                        totalCount: data.totalCount,
+                    })
                     setCardList([...data.data])
                     resolve(true)
                 } catch (error) {
@@ -100,10 +115,10 @@ export const InitProvider = (props: childrenProps) => {
         loading: loading,
         setPage: (pageNumber: string) => setPage(pageNumber),
         CardList: CardList,
-        count: 0,
-        page: 0,
-        pageSize: 0,
-        totalCount: 0,
+        count: pageOverview.count,
+        page: pageOverview.page,
+        pageSize: pageOverview.pageSize,
+        totalCount: pageOverview.totalCount,
         Rarity: RarityType,
         Type: Type
     };

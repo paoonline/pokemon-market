@@ -1,7 +1,7 @@
 import axios, { AxiosInstance, AxiosRequestConfig } from "axios"
 
 const config: AxiosRequestConfig = {
-    baseURL: "https://api.pokemontcg.io/v2",
+    baseURL: process.env.REACT_APP_BASE_URL_POKEMON,
     headers: {
         'Content-Type': 'application/json'
     },
