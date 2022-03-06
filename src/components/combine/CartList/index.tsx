@@ -1,8 +1,6 @@
-import { ButtonMinus } from "../../each/Button"
-import { ButtonPlus } from "../../each/Button"
-import { ButtonNumber } from "../../each/Button"
-
+import { ButtonMinus, ButtonPlus, ButtonNumber } from "../../each/Button"
 export const CartList = () => {
+
     return (
         <div className='overflow-scroll relative  px-4 sm:px-6  h-60% sm:h-70%'>
             <div className="flex flex-row mb-5">

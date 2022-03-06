@@ -1,12 +1,26 @@
 import { ButtonAddToCard } from "../Button"
+import { windowDimension } from '../../../utils'
+interface cardProps {
+    prices: any,
+    updatedAt: string,
+    url: string
+}
+interface imageProps {
+    large: string,
+    small: string
+}
+interface CardAble {
+    list: { images: imageProps, cardmarket: cardProps }
+}
 
-export const Card = (): JSX.Element => {
+export const Card = (props: CardAble): JSX.Element => {
+    const { width } = windowDimension()
     return (
         <div className='mt-12 sm:mt-0 bg-backgroundBlack w-full sm:w-44 h-176 flex flex-col rounded-2xl justify-around items-center mb-36 pl-3 pr-3'>
             <div className='absolute w-194 h-270 sm:h-142 sm:w-102 mb-82 sm:mb-60'>
                 <img
                     style={{ backgroundRepeat: 'repeat-y' }}
-                    src={'https://images.pokemontcg.io/pl3/1.png'}
+                    src={width > 768 ? props.list.images.large : props.list.images.small}
                     alt={'test'}
                     className="w-full h-full object-center object-cover"
                 />

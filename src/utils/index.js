@@ -1,4 +1,5 @@
 import windowDimension from "./windowDimension";
 import t from "./language";
+import { instanceAxios } from "./network";
 
-export { windowDimension, t };
+export { windowDimension, t, instanceAxios };
