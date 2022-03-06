@@ -9,7 +9,7 @@ import { CartList } from '../CartList'
 import { ButtonContinueToPayment } from '../../'
 
 export const Slide = (): JSX.Element => {
-    const { totalCardAmount, totalPrice } = useContext(CartContext)
+    const { totalCardAmount, totalPrice, removeCart } = useContext(CartContext)
     const { open, setOpen } = useContext(SlideContext)
     return (
         <Transition.Root show={open} as={Fragment}>
@@ -56,9 +56,9 @@ export const Slide = (): JSX.Element => {
                                                 <div className='text-white font-semibold text-lg '>
                                                     {language.cart}
                                                 </div>
-                                                <div className='text-xs mt-1 text-gray-card'>
+                                                <button className='text-xs mt-1 text-gray-card' onClick={() => removeCart()}>
                                                     {language.clear_all}
-                                                </div>
+                                                </button>
                                             </div>
                                         </Dialog.Title>
 

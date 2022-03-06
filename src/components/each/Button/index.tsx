@@ -8,7 +8,7 @@ import language from '../../../utils/language'
 
 interface ButtonAble {
     amount: number,
-    detail: any
+    detail: any,
 }
 
 interface ButtonNumberProps {
@@ -40,12 +40,16 @@ export const ButtonClosed = (props: any): JSX.Element => {
 }
 
 export const ButtonAddToCard = (props: ButtonAble): JSX.Element => {
+    const { setOpen } = useContext(SlideContext)
     const cartContext = useContext(CartContext)
     const { addToCart } = cartContext
     return (
         <button
             disabled={props.amount <= 0}
-            onClick={() => addToCart(props.detail, 'plus')}
+            onClick={() => {
+                addToCart(props.detail, 'plus')
+                setOpen(true)
+            }}
             type="submit"
             className={`text-xs h-38 w-full ${props.amount > 0 ? 'bg-gray-not-active' : 'bg-add-disabled'} border border-transparent rounded-md pr-2 flex items-center justify-center font-medium text-white ${props.amount > 0 && 'hover:bg-gray-active'}`}
         >

@@ -6,6 +6,8 @@ interface CartAble extends totalSetAble {
     handleCart: (data: any, type: string) => void,
     setCartList: (data: any) => void,
     setTotalSetAble: (data: any) => void
+    removeCart: () => void
+
 }
 interface childrenProps {
     children: object
@@ -67,6 +69,14 @@ export const CartProvider = (props: childrenProps) => {
         }
     }
 
+    const removeCart = () => {
+        setCartList([])
+        setTotalSetAble({
+            totalCardAmount: 0,
+            totalPrice: 0
+        })
+    }
+
     const handleCart = (id: string, type: string) => {
         const findId = CartListDetail.findIndex(res => res.id === id)
         const findIdElement = CartListDetail[findId]
@@ -106,7 +116,8 @@ export const CartProvider = (props: childrenProps) => {
         addToCart: (data: any, type: string) => addToCart(data, type),
         handleCart: (data: any, type: string) => handleCart(data, type),
         setCartList: (data: any) => setCartList(data),
-        setTotalSetAble: (data: any) => setTotalSetAble(data)
+        setTotalSetAble: (data: any) => setTotalSetAble(data),
+        removeCart: () => removeCart()
     };
     return (
         <CartContext.Provider value={store}>
