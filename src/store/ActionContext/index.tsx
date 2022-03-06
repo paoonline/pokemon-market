@@ -4,6 +4,7 @@ interface ActionProps {
     handleTextSearch: (textSearch: string) => void,
     tempList: Array<any>;
     handleSubmitDropdown: (obj: any, type: string) => void,
+    handlePagination: (page: number) => void
 }
 interface childrenProps {
     children: object
@@ -14,7 +15,7 @@ export const ActionProvider = (props: childrenProps) => {
     const [tempList, setTempList] = useState<Array<any>>([]);
     const [stampSearch, setStampSearch] = useState(false)
     const initContext = useContext(InitContext)
-    const { setCardList, CardList, dropdownText } = initContext
+    const { setCardList, CardList, dropdownText, setPaginationPage, refreshList } = initContext
 
     const handleTempList = async () => {
         setTempList(CardList)
@@ -46,6 +47,11 @@ export const ActionProvider = (props: childrenProps) => {
         }
     }
 
+    const handlePagination = async (cal: number) => {
+        await setPaginationPage(cal)
+        refreshList(cal)
+    }
+
     useEffect(() => {
         if (!stampSearch && CardList.length > 0) {
             handleTempList()
@@ -67,7 +73,8 @@ export const ActionProvider = (props: childrenProps) => {
     const store = {
         handleTextSearch,
         tempList,
-        handleSubmitDropdown
+        handleSubmitDropdown,
+        handlePagination
     };
     return (
         <ActionContext.Provider value={store}>

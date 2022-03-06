@@ -6,14 +6,16 @@ interface InitProps extends CardProps {
     CardList: Array<any>;
     Rarity: Array<string>;
     Type: Array<string>
-    setPage: (pageNumber: string) => void,
+    setPaginationPage: (pageNumber: number) => void,
     setCardList: (CardList: Array<any>) => void,
     dropdownText: {
         RarityDropdown: string,
         TypeDropdown: string,
         setRarityDropdown: (rarity: string) => void,
         setTypeDropdown: (type: string) => void,
-    }
+    },
+    paginationPage: number,
+    refreshList: (page: number) => void,
 }
 interface childrenProps {
     children: object
@@ -28,7 +30,7 @@ interface CardProps {
 export const InitContext = createContext({} as InitProps);
 export const InitProvider = (props: childrenProps) => {
     const [loading, setLoading] = useState(true)
-    const [page, setPage] = useState('1')
+    const [paginationPage, setPaginationPage] = useState(1)
     const [CardList, setCardList] = useState<Array<any>>([]);
     const [RarityType, setRarityType] = useState<Array<string>>([]);
     const [Type, setType] = useState<Array<string>>([]);
@@ -40,13 +42,30 @@ export const InitProvider = (props: childrenProps) => {
     })
     const [RarityDropdown, setRarityDropdown] = useState('Rarity')
     const [TypeDropdown, setTypeDropdown] = useState('Type')
+    const [refresh, setRefresh] = useState(false)
+
+    const refreshList = async (page: number) => {
+        await setRefresh(true)
+        await setLoading(true)
+        const data = await instanceAxios
+            .get(`/cards?page=${page}&pageSize=20`)
+            .then((response) => {
+                return response.data
+            })
+            .catch((error: AxiosError) => {
+                console.error('error: ', error);
+            })
+        setCardList([...data.data])
+        setLoading(false)
+        setRefresh(false)
+    }
 
     const getInit = async () => {
         const getPokemonCard = new Promise(
             async (resolve, reject) => {
                 try {
                     const data = await instanceAxios
-                        .get(`/cards?page=${page}&pageSize=20`)
+                        .get(`/cards?page=${paginationPage}&pageSize=20`)
                         .then((response) => {
                             return response.data
                         })
@@ -117,14 +136,14 @@ export const InitProvider = (props: childrenProps) => {
 
     }
     useEffect(() => {
-        if (loading) {
+        if (loading && !refresh) {
             getInit()
         }
     }, [loading])
 
     const store: InitProps = {
         loading: loading,
-        setPage: (pageNumber: string) => setPage(pageNumber),
+        setPaginationPage: (pageNumber: number) => setPaginationPage(pageNumber),
         setCardList: (CardList: Array<any>) => setCardList(CardList),
         CardList: CardList,
         count: pageOverview.count,
@@ -138,7 +157,9 @@ export const InitProvider = (props: childrenProps) => {
             TypeDropdown: TypeDropdown,
             setRarityDropdown: (rarity: string) => setRarityDropdown(rarity),
             setTypeDropdown: (type: string) => setTypeDropdown(type),
-        }
+        },
+        paginationPage: paginationPage,
+        refreshList: (page: number) => refreshList(page)
     };
     return (
         <InitContext.Provider value={store}>
