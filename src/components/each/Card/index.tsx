@@ -19,6 +19,7 @@ interface CardAble {
 
 export const Card = (props: CardAble): JSX.Element => {
     const { width } = windowDimension()
+
     return (
         <div className='mt-12 sm:mt-0 bg-backgroundBlack w-full sm:w-44 h-176 flex flex-col rounded-2xl justify-around items-center mb-36 pl-3 pr-3'>
             <div className='absolute w-194 h-270 sm:h-142 sm:w-102 mb-82 sm:mb-60'>
@@ -38,7 +39,7 @@ export const Card = (props: CardAble): JSX.Element => {
                 {props.list.set.total} Cards
             </div>
             <div className="w-full pb-1">
-                <ButtonAddToCard amount={props.list.set.total} />
+                <ButtonAddToCard amount={props.list.set.total} detail={props.list} />
             </div>
         </div>
     )

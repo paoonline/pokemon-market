@@ -3,11 +3,20 @@ import { ShoppingBagIcon, XIcon } from '@heroicons/react/solid'
 import { PlusIcon } from '@heroicons/react/solid'
 import { MinusIcon } from '@heroicons/react/solid'
 import { useContext } from 'react'
-import { SlideContext } from '../../../store'
+import { SlideContext, CartContext } from '../../../store'
 import language from '../../../utils/language'
 
 interface ButtonAble {
+    amount: number,
+    detail: any
+}
+
+interface ButtonNumberProps {
     amount: number
+}
+
+interface ButtonProps {
+    detail: any
 }
 
 export const ButtonCart = (props: any): JSX.Element => {
@@ -31,11 +40,12 @@ export const ButtonClosed = (props: any): JSX.Element => {
 }
 
 export const ButtonAddToCard = (props: ButtonAble): JSX.Element => {
-
+    const cartContext = useContext(CartContext)
+    const { addToCart } = cartContext
     return (
         <button
             disabled={props.amount <= 0}
-            onClick={() => { }}
+            onClick={() => addToCart(props.detail, 'plus')}
             type="submit"
             className={`text-xs h-38 w-full ${props.amount > 0 ? 'bg-gray-not-active' : 'bg-add-disabled'} border border-transparent rounded-md pr-2 flex items-center justify-center font-medium text-white ${props.amount > 0 && 'hover:bg-gray-active'}`}
         >
@@ -45,9 +55,11 @@ export const ButtonAddToCard = (props: ButtonAble): JSX.Element => {
     )
 }
 
-export const ButtonPlus = (): JSX.Element => {
+export const ButtonPlus = (props: ButtonProps): JSX.Element => {
+    const { handleCart } = useContext(CartContext)
     return (
         <button
+            onClick={() => handleCart(props.detail.id, 'plus')}
             type="submit"
             className="text-xs h-54 w-54 bg-gray-not-active border border-transparent rounded-md flex items-center justify-center text-base font-medium text-white hover:bg-gray-active"
         >
@@ -57,9 +69,11 @@ export const ButtonPlus = (): JSX.Element => {
 }
 
 
-export const ButtonMinus = (): JSX.Element => {
+export const ButtonMinus = (props: ButtonProps): JSX.Element => {
+    const { handleCart } = useContext(CartContext)
     return (
         <button
+            onClick={() => handleCart(props.detail.id, 'minus')}
             type="submit"
             className="text-xs h-54 w-54 bg-gray-not-active border border-transparent rounded-md flex items-center justify-center text-base font-medium text-white hover:bg-gray-active"
         >
@@ -69,24 +83,34 @@ export const ButtonMinus = (): JSX.Element => {
 }
 
 
-export const ButtonNumber = (): JSX.Element => {
+export const ButtonNumber = (props: ButtonNumberProps): JSX.Element => {
     return (
         <button
             type="submit"
-            className="text-xs h-54 w-full bg-gray-not-active border border-transparent rounded-md flex items-center justify-center text-base font-medium text-white hover:bg-gray-active"
+            disabled
+            className="text-xs h-54 w-full bg-gray-not-active border border-transparent rounded-md flex items-center justify-center text-base font-medium text-white"
         >
-            1
+            {props.amount}
         </button>
     )
 }
 
 export const ButtonContinueToPayment = (): JSX.Element => {
+    const { setCartList, setTotalSetAble } = useContext(CartContext)
+    const { setOpen } = useContext(SlideContext)
     return (
         <button
+            onClick={() => {
+                setTotalSetAble({
+                    totalCardAmount: 0,
+                    totalPrice: 0
+                })
+                setCartList([])
+                setOpen(false)
+            }}
             type="submit"
             className="text-xs h-12 bg-button-orange w-full  border border-transparent rounded-md pr-2 flex items-center justify-center font-medium text-white"
         >
-            <ShoppingBagIcon className='h-5 w-5 pr-1 mr-1' />
             {language.payment}
         </button>
     )

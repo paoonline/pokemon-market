@@ -2,13 +2,14 @@
 import { Fragment, useContext } from 'react'
 import { Dialog, Transition } from '@headlessui/react'
 
-import { SlideContext } from '../../../store'
+import { SlideContext, CartContext } from '../../../store'
 import language from '../../../utils/language'
 import { ButtonClosed } from '../../each/Button'
 import { CartList } from '../CartList'
 import { ButtonContinueToPayment } from '../../'
 
 export const Slide = (): JSX.Element => {
+    const { totalCardAmount, totalPrice } = useContext(CartContext)
     const { open, setOpen } = useContext(SlideContext)
     return (
         <Transition.Root show={open} as={Fragment}>
@@ -83,7 +84,7 @@ export const Slide = (): JSX.Element => {
                                             {language.total_card_amount}
                                         </div>
                                         <div className="flex-none w-14  text-white text-xs break-all">
-                                            6
+                                            {totalCardAmount}
                                         </div>
 
                                     </div>
@@ -93,7 +94,7 @@ export const Slide = (): JSX.Element => {
                                             {language.total_price}
                                         </div>
                                         <div className="flex-none w-16  text-white text-xs break-all">
-                                            $ 21,030.0022222
+                                            $ {totalPrice.toFixed(2)}
                                         </div>
                                     </div>
 
