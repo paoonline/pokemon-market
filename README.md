@@ -1,4 +1,5 @@
 first install
+git checkout master
 1. yarn install or npm install
 2. npm run start
 3. enjoy
