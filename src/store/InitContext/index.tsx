@@ -7,6 +7,7 @@ interface InitProps extends CardProps {
     Rarity: Array<string>;
     Type: Array<string>
     setPage: (pageNumber: string) => void,
+    setCardList: (CardList: Array<any>) => void
 }
 interface childrenProps {
     children: object
@@ -51,7 +52,7 @@ export const InitProvider = (props: childrenProps) => {
                         totalCount: data.totalCount,
                     })
                     setCardList([...data.data])
-                    resolve(true)
+                    resolve(data)
                 } catch (error) {
                     reject(error)
                 }
@@ -114,6 +115,7 @@ export const InitProvider = (props: childrenProps) => {
     const store: InitProps = {
         loading: loading,
         setPage: (pageNumber: string) => setPage(pageNumber),
+        setCardList: (CardList: Array<any>) => setCardList(CardList),
         CardList: CardList,
         count: pageOverview.count,
         page: pageOverview.page,

@@ -8,13 +8,14 @@ interface CardProps {
     page: number,
     pageSize: number,
     totalCount: number,
+    CardList: Array<any>
 }
 
 export const Pagination = (): JSX.Element => {
     const initContext = useContext(InitContext)
-    const { count, page, pageSize, totalCount }: CardProps = initContext
+    const { count, page, pageSize, totalCount, CardList }: CardProps = initContext
 
-    return (
+    return CardList.length >= 20 && count > 0 ? (
         <div className="bg-backgroundBlack px-4 py-3 flex items-center justify-between sm:px-6">
             <div className="flex-1 flex justify-between sm:hidden">
                 <a
@@ -70,5 +71,5 @@ export const Pagination = (): JSX.Element => {
                 </div>
             </div>
         </div>
-    )
+    ) : <div></div>
 }

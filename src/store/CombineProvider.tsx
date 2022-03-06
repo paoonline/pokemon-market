@@ -1,5 +1,6 @@
-import { InitProvider, SlideProvider } from './index'
-
+import { InitProvider } from './InitContext'
+import { SlideProvider } from './SlideContext'
+import { ActionProvider } from './ActionContext'
 
 interface childrenProps {
     children: object
@@ -8,9 +9,11 @@ interface childrenProps {
 export const CombineProvider = (props: childrenProps) => {
     return (
         <InitProvider >
-            <SlideProvider>
-                {props.children}
-            </SlideProvider>
+            <ActionProvider>
+                <SlideProvider>
+                    {props.children}
+                </SlideProvider>
+            </ActionProvider>
         </InitProvider>
     )
 
