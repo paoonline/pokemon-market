@@ -10,15 +10,15 @@ function classNames(...classes: string[]) {
 
 interface DropdownAble {
     name?: string;
-    list?: Array<String>
+    lists?: Array<string>
 }
 
-export const Dropdown = (props: DropdownAble) => {
+export const Dropdown = (props: DropdownAble): JSX.Element => {
     return (
         <Menu as="div" className="relative inline-block text-left">
 
-            <Menu.Button className="flex-row flex items-center h-36 w-20 border-solid border-2 border-border-hover bg-backgroundBlack text-gray-400 inline-flex justify-center w-full rounded-md   shadow-sm  text-sm font-medium text-700 hover:text-white focus:outline-none">
-                Set
+            <Menu.Button disabled={props.name === 'Set' ? true : false} className={`disabled:opacity-75 flex-row flex items-center h-36 w-24 border-solid border-2 border-border-hover bg-backgroundBlack text-gray-400 inline-flex justify-center w-full rounded-md   shadow-sm  text-sm font-medium text-700 ${props.name !== 'Set' && 'hover:text-white'} focus:outline-none`}>
+                {props.name}
                 <ChevronDownIcon className="-mr-1 ml-2 h-5 w-5" aria-hidden="true" />
             </Menu.Button>
 
@@ -34,32 +34,24 @@ export const Dropdown = (props: DropdownAble) => {
             >
                 <Menu.Items className="z-50 border-solid border-2 border-border-hover  origin-top-right absolute right-0 mt-2 w-44 rounded-md shadow-lg bg-backgroundBlack ring-1 ring-black ring-opacity-5 focus:outline-none">
                     <div className="">
-                        <Menu.Item>
-                            {({ active }) => (
-                                <a
-                                    href="#"
-                                    className={classNames(
-                                        active ? 'bg-hover-dropdown text-white' : 'text-white border-b-2 border-border-hover',
-                                        'block px-4 py-2 text-sm border-b-2 border-border-hover'
+
+                        {props.lists?.map((res, i) => {
+                            return (
+                                <Menu.Item key={res + '_' + i}>
+                                    {({ active }) => (
+                                        <a
+                                            href="#"
+                                            className={classNames(
+                                                active ? 'bg-hover-dropdown text-white' : 'text-white border-b-2 border-border-hover',
+                                                'block px-4 py-2 text-sm border-b-2 border-border-hover'
+                                            )}
+                                        >
+                                            {res}
+                                        </a>
                                     )}
-                                >
-                                    Account settings
-                                </a>
-                            )}
-                        </Menu.Item>
-                        <Menu.Item >
-                            {({ active }) => (
-                                <a
-                                    href="#"
-                                    className={classNames(
-                                        active ? 'bg-hover-dropdown text-white' : 'text-white',
-                                        'block px-4 py-2 text-sm'
-                                    )}
-                                >
-                                    Account settings
-                                </a>
-                            )}
-                        </Menu.Item>
+                                </Menu.Item>
+                            )
+                        })}
                     </div>
                 </Menu.Items>
             </Transition>

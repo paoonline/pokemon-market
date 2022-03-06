@@ -1,7 +1,7 @@
 import { ButtonAddToCard } from "../Button"
 import { windowDimension } from '../../../utils'
 interface cardProps {
-    prices: any,
+    prices: { averageSellPrice: number },
     updatedAt: string,
     url: string
 }
@@ -9,8 +9,12 @@ interface imageProps {
     large: string,
     small: string
 }
+
+interface setProps {
+    total: number
+}
 interface CardAble {
-    list: { images: imageProps, cardmarket: cardProps }
+    list: { images: imageProps, cardmarket: cardProps, set: setProps, name: string }
 }
 
 export const Card = (props: CardAble): JSX.Element => {
@@ -26,12 +30,12 @@ export const Card = (props: CardAble): JSX.Element => {
                 />
             </div>
 
-            <div className='text-white text-xs text-center mt-10 break-all relative top-3'>namenamenamenamenamenamenamename</div>
+            <div className='text-white text-xs text-center mt-10 break-all relative top-3'>{props.list.name}</div>
 
             <div className='text-gray-card text-xs text-center flex flex-row justify-around relative top-2 break-all'>
-                $ 2.29
+                $ {props.list.cardmarket.prices.averageSellPrice}
                 <div className="ml-2 mr-2 break-all">{'\u2022'} </div>
-                20 Cards
+                {props.list.set.total} Cards
             </div>
             <div className="w-full pb-1">
                 <ButtonAddToCard />
